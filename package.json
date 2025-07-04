@@ -18,13 +18,12 @@
     "vue3",
     "unused",
     "unimported",
-    "components",
-    "files",
-    "dead-code",
-    "cleaner",
-    "linter",
-    "cli",
-    "project-cleaner"
+    "unused-assets",
+    "unused-components",
+    "project-maintenance",
+    "build-optimizer",
+    "bundle-size",
+    "vue-cli-tool"
   ],
   "main": "lib/analyzer.js",
   "bin": {
