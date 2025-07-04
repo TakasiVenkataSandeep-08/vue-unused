@@ -1,0 +1,62 @@
+{
+  "name": "vue-unused",
+  "version": "0.0.1",
+  "description": "A highly accurate CLI tool to find and remove unused Vue components and files.",
+  "author": "Takasi Venkata Sandeep",
+  "license": "MIT",
+  "homepage": "https://github.com/TakasiVenkataSandeep-08/vue-unused#README",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TakasiVenkataSandeep-08/vue-unused.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TakasiVenkataSandeep-08/vue-unused/issues"
+  },
+  "keywords": [
+    "vue",
+    "vue2",
+    "vue3",
+    "unused",
+    "unimported",
+    "components",
+    "files",
+    "dead-code",
+    "cleaner",
+    "linter",
+    "cli",
+    "project-cleaner"
+  ],
+  "main": "lib/analyzer.js",
+  "bin": {
+    "vue-unused": "./bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "release-it"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.24.0",
+    "@babel/traverse": "^7.24.0",
+    "@vue/compiler-sfc": "^3.5.17",
+    "chalk": "^5.0.0",
+    "fast-glob": "^3.3.1",
+    "ignore": "^7.0.5",
+    "ora": "^8.2.0",
+    "p-limit": "^6.2.0",
+    "vue-template-compiler": "^2.7.14"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^10.0.1",
+    "release-it": "^19.0.3"
+  }
+}

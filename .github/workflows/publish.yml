@@ -1,0 +1,50 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  publish:
+    # Skip if the commit was made by the release bot itself
+    if: github.actor != 'github-actions[bot]' && !contains(github.event.head_commit.message, '[skip ci]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.RELEASE_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
+      - run: npm ci
+      # Add a build step here if you have one
+      # run: npm run build
+      - name: Set up git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Check version bump
+        id: version
+        run: |
+          VERSION=$(jq -r .version package.json)
+          git fetch --tags
+          LATEST=$(git tag --list 'v*' --sort=-v:refname | head -n 1 | sed 's/^v//')
+          echo "Current version: $VERSION"
+          echo "Latest tag: $LATEST"
+          if [ "$VERSION" = "$LATEST" ]; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Publish with release-it
+        if: steps.version.outputs.changed == 'true'
+        run: npx release-it --ci --no-increment
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

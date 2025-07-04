@@ -1,0 +1,33 @@
+{
+    "git": {
+        "commitMessage": "chore(release): v${version} [skip ci]",
+        "tagName": "v${version}",
+        "requireCleanWorkingDir": true,
+        "requireBranch": "main",
+        "requireUpstream": true
+    },
+    "github": {
+        "release": true,
+        "releaseName": "v${version}",
+        "tokenRef": "GITHUB_TOKEN"
+    },
+    "npm": {
+        "publish": true,
+        "publishPath": ".",
+        "tag": "latest",
+        "tokenRef": "NODE_AUTH_TOKEN"
+    },
+    "hooks": {
+        "before:init": [],
+        "after:bump": [
+            "npm run build || true"
+        ]
+    },
+    "plugins": {
+        "@release-it/conventional-changelog": {
+            "preset": "conventionalcommits"
+        }
+    },
+    "increment": false,
+    "nonInteractive": true
+}
