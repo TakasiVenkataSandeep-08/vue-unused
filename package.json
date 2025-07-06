@@ -1,6 +1,6 @@
 {
   "name": "vue-unused",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A highly accurate CLI tool to find and remove unused Vue components and files.",
   "author": "Takasi Venkata Sandeep",
   "license": "MIT",
