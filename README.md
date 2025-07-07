@@ -81,23 +81,65 @@ If you suspect a file is being incorrectly flagged, run with the `--verbose` fla
 vue-unused --verbose
 ```
 
-### Create Configuration
+### Create / Customise Configuration
 
-To generate a default configuration file, run:
+`vue-unused` can now guide you through creating a configuration file interactively. Simply run:
 
 ```bash
 vue-unused --createConfig
 ```
 
+You will be prompted to either accept the defaults or customise options such as aliases, output format, deletion behaviour, and entry files. In CI (non-TTY) environments the command automatically falls back to generating the default config without prompts.
+
+---
+
+### Generate a Dependency Graph
+
+Need a full picture of how your files depend on each other? Use the new `--graph` flag or `graph` command:
+
+```bash
+vue-unused --graph          # or simply: vue-unused graph
+```
+
+This produces a `dependency-graph.json` at the project root mapping every file to the files it imports.
+
+---
+
+### Help & Manual
+
+For quick reference:
+
+```bash
+vue-unused --help   # short usage and options
+```
+
+For the full manual (renders the project README in the terminal):
+
+```bash
+vue-unused --manual   # or: vue-unused manual
+```
+
+---
+
+### Safety Confirmation for Deletion
+
+When you pass the `--delete` flag in an interactive terminal, the CLI now **asks for confirmation** before removing files, preventing accidental data loss. In non-interactive environments (like CI) it behaves exactly as before.
+
+---
+
 ## Command-Line Options
 
-| Option           | Description                                                                                                                                                                       |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--json`         | Outputs the list of unused files to `unused-files.json` in your project root instead of logging to the console.                                                                   |
-| `--delete`       | **DANGER:** Permanently deletes all identified unused files from your filesystem. Use with caution.                                                                               |
-| `--config`       | A path to a custom JavaScript configuration file (e.g., `./config/vue-unused.cjs`).                                                                                               |
-| `--verbose`      | Enables detailed logging, showing which files are being scanned and how imports are being resolved.                                                                               |
-| `--createConfig` | Generate a default configuration file (`.vue-unused.config.cjs`) in the current directory. This file can be used to customize `vue-unused` behavior without command-line options. |
+| Option / Command       | Description                                                                                            |
+| ---------------------- | ------------------------------------------------------------------------------------------------------ |
+| `--json`               | Output unused-file list to `unused-files.json` instead of the console.                                 |
+| `--delete`             | Delete unused files after confirmation (interactive) or immediately (CI).                              |
+| `--graph` / `graph`    | Generate `dependency-graph.json` containing the full import graph.                                     |
+| `--config <path>`      | Use a specific config file instead of auto-detecting one.                                              |
+| `--createConfig`       | Launch an interactive wizard to create `vue-unused.config.cjs` (non-interactive fallback to defaults). |
+| `--verbose`            | Print detailed processing information.                                                                 |
+| `--help`, `-h`, `help` | Show quick usage help.                                                                                 |
+| `--manual`, `manual`   | Show the full manual (this README) in the terminal.                                                    |
+| `--version`, `-v`      | Print the current version and exit.                                                                    |
 
 ---
 
