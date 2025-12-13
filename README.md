@@ -25,6 +25,7 @@ Many tools that try to find unused files only check if a file has been `import`-
 - **⚙️ Zero-Config By Default:** Automatically finds your project root and respects your `.gitignore` file out of the box. No configuration is needed for most projects.
 - **🛣️ Robust Path Resolution:** Correctly handles aliased paths (`@/components`), relative paths (`../utils`), and extensionless imports.
 - **🚀 Dynamic Import Aware:** Understands dynamic `import()` calls to trace dependencies loaded at runtime.
+- **📦 Bundle Analysis:** Optional tree-shaking aware analysis using build outputs for maximum accuracy.
 - **🛠️ Fully Configurable:** Provides a simple `vue-unused.config.js` for advanced customization when you need it.
 
 ---
@@ -105,6 +106,18 @@ This produces a `dependency-graph.json` at the project root mapping every file t
 
 ---
 
+### Bundle Analysis for Maximum Accuracy
+
+For the most accurate unused file detection, analyze your build outputs to account for tree-shaking:
+
+```bash
+vue-unused --bundle
+```
+
+This analyzes your bundle directory and shows files that are truly unused after your bundler (webpack, Vite, etc.) processes the code.
+
+---
+
 ### Help & Manual
 
 For quick reference:
@@ -134,6 +147,8 @@ When you pass the `--delete` flag in an interactive terminal, the CLI now **asks
 | `--json`               | Output unused-file list to `unused-files.json` instead of the console.                                 |
 | `--delete`             | Delete unused files after confirmation (interactive) or immediately (CI).                              |
 | `--graph` / `graph`    | Generate `dependency-graph.json` containing the full import graph.                                     |
+| `--bundle`             | Analyze bundle outputs for tree-shaken unused files (most accurate).                                   |
+| `--bundle-dir <path>`  | Specify custom bundle directory (default: auto-detect).                                                |
 | `--config <path>`      | Use a specific config file instead of auto-detecting one.                                              |
 | `--createConfig`       | Launch an interactive wizard to create `vue-unused.config.cjs` (non-interactive fallback to defaults). |
 | `--verbose`            | Print detailed processing information.                                                                 |
