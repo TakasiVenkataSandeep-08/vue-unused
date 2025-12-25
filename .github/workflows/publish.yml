@@ -23,7 +23,7 @@ jobs:
           node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
       - run: npm ci
-      # Add a build step here if you have one
+      # Add a build step here if you have one when needed
       # run: npm run build
       - name: Set up git user
         run: |
